@@ -1,12 +1,20 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
-dotenv.config({ path: "server/config/config.env" });
+const errorMiddleware = require("./middleware/error");
 
-const connectDatabase = require('./config/database')
-connectDatabase();
+// * Middlewares
+app.use(express.json());
+ 
+// * Route Imports
+const product = require("./routes/productRoute");
+app.use("/api/v1", product);
 
-app.listen(process.env.PORT, () => {
-    console.log(`SERVER RUNNING AT ${process.env.PORT}`)
-});
+// Middleware for Errors
+app.use(errorMiddleware);
+
+module.exports = app;
+
+
+
+
 
