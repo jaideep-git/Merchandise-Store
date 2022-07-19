@@ -36,14 +36,14 @@ const Alert = (props) => {
     }, 400)
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width === 100) {
       // Close Alert
       handleCloseAlert()
     }
   }, [width])
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleStartTimer();
   }, []);
 
