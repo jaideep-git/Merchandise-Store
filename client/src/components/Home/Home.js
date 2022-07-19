@@ -5,18 +5,28 @@ import './Home.css';
 import Container from '@mui/material/Container';
 import Grid from "@mui/material/Grid";
 import Title from '../layout/Navbar/Title';
-import { getProduct } from '../../store/actions/productAction';
+import { getProducts } from '../../store/actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../layout/Loader/Loading';
+import { useAlert } from '../Alerts/AlertProvider'
 
 
 function Home() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  const alert = useAlert();
   const { fetching, error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getProduct())
+    dispatch(getProducts());
   }, [dispatch]);
+ 
+  useEffect(() => {
+    if (error) {
+      alert({
+        message:error
+      });
+    }
+  }, [error, alert]);
 
   return (
     <>

@@ -4,7 +4,7 @@ const catchAsynError = require("../middleware/catchAsyncErrors");
 const Features = require('../utils/features');
 
 // * Get all products
-exports.getProducts = catchAsynError(async (req, res) => {
+exports.getProducts = catchAsynError(async (req, res,next) => {
     const resultPerPage = 8;
     const productCount = await Product.countDocuments()
 
