@@ -4,9 +4,20 @@
   scroll-behavior: smooth;
 }
 
+#root{
+  min-height: 100vh; 
+  margin: 0; 
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,100&display=swap');
 
 body{
+  font-family:Montserrat;
+}
+button{
   font-family:Montserrat;
 }
 .App {

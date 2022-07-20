@@ -4,17 +4,21 @@ const catchAsynError = require("../middleware/catchAsyncErrors");
 const Features = require('../utils/features');
 
 // * Get all products
-exports.getProducts = catchAsynError(async (req, res,next) => {
+exports.getProducts = catchAsynError(async (req, res, next) => {
     const resultPerPage = 8;
-    const productCount = await Product.countDocuments()
+    const productCount = await Product.countDocuments();
 
     const apiFeature = new Features(Product.find(), req.query).search().filter().pagination(resultPerPage);
     const products = await apiFeature.query;
 
+    filteredProductCount = products.length;
+      
     res.status(200).json({
         success: true,
         products,
-        productCount
+        productCount,
+        resultPerPage,
+        filteredProductCount
     });
 });
 

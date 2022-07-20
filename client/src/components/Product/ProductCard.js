@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./Product.css";
+import "./ProductStyles.css";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import office from '../../assets/theoffice_600x.png';
-import ReactStars from "react-rating-stars-component";
+import StarRatings from 'react-star-ratings';
 
 
 function ProductCard({ product }) {
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "tomato",
-    size: window.innerWidth < 600 ? 20 : 25,
-    value:product.rating,
-    isHalf: true,
+    rating:product.rating,
+    isSelectable: false,
+    starEmptyColor: "rgba(20,20,20,0.1)",
+    starRatedColor: "tomato",
+    starDimension:"15px",
+    starSpacing:"1px",
   };
 
   return (
-    <Link  to={ product._id }>
-      <Card sx={{ maxWidth: 300 }} className='product_card' style={{height:"400px"}}>
+    <Link  to={ `/product/${product._id}` }>
+      <Card sx={{ maxWidth: 350 }} className='product_card' style={{height:"auto"}}>
         <CardMedia
           component="img"
           height="240"
@@ -30,7 +30,7 @@ function ProductCard({ product }) {
         <CardContent>
           <h3>{product.name} </h3>
           <div className='product_rating'>
-            <ReactStars {...options}/> <span>{product.totalReviews}  Reviews</span>
+            <StarRatings {...options}/> <span>{product.totalReviews}  Reviews</span>
           </div>
           <h3>${ product.price }</h3>
         </CardContent>

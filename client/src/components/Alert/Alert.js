@@ -6,8 +6,10 @@ const Alert = (props) => {
   const [width, setWidth] = useState(0);
   const [intervalID, setIntervalID] = useState(null);
 
+  // * Starts Alert Timer
   const handleStartTimer = () => {
     const id = setInterval(() => {
+      // Changes bar width
       setWidth(prev => {
         if (prev < 100) {
           return prev + 0.5;
@@ -21,10 +23,12 @@ const Alert = (props) => {
     setIntervalID(id);
   };
 
+  // * Pauses Alert Timer
   const handlePauseTimer = () => {
     clearInterval(intervalID);
   };
 
+  // * Removes Alert From the Dom
   const handleCloseAlert = () => {
     handlePauseTimer();
     setExit(true);
@@ -36,14 +40,13 @@ const Alert = (props) => {
     }, 400)
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width === 100) {
-      // Close Alert
       handleCloseAlert()
     }
   }, [width])
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleStartTimer();
   }, []);
 

@@ -28,6 +28,7 @@ const AlertProvider = (props) => {
   )
 };
 
+// * Error Alert Reducer
 export const useAlert = () => {
   const dispatch = useContext(AlertContext);
 

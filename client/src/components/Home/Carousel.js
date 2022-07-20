@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css';
+import './Carousel.css';
 import office from '../../assets/office.jpg';
 import Slider from "react-slick";
 
@@ -16,7 +16,7 @@ function Carousel() {
     <div className='hero'>
       <Slider {...settings}>
           <div className='hero_image'>
-            <img src={office} alt="" srcset="" />
+            <img src={office} alt=""/>
           </div>
         </Slider>
     </div>
