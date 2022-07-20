@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Alert.css'
 
 const Alert = (props) => {
-    const [exit, setExit] = useState(false);
+  const [exit, setExit] = useState(false);
   const [width, setWidth] = useState(0);
   const [intervalID, setIntervalID] = useState(null);
 
