@@ -99,6 +99,23 @@
   margin-top: 3rem;
 }
 
+.filterSection_mob{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.filter_label{
+  display: flex;
+  align-items: center;
+}
+
+.filter_label p{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
 @media only screen and (max-width: 768px) {
   .product_image img{
     width: 100%;

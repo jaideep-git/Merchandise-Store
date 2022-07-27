@@ -4,6 +4,10 @@
   scroll-behavior: smooth;
 }
 
+h1,h2,h3,h4,h5,h6,button,p,span{
+  color: #474646;
+}
+
 #root{
   min-height: 100vh; 
   margin: 0; 
@@ -43,11 +47,8 @@ button{
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media only screen and (max-width: 768px) {
+  #root{
+    display: block;
   }
 }

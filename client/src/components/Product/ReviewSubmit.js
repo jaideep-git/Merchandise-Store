@@ -1,11 +1,29 @@
 import { set } from 'mongoose';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './ProductStyles.css';
+import { createReview } from '../../store/actions/productAction';
+import { useDispatch,useSelector } from "react-redux";
 
 
-const ReviewSubmit = ({ product }) => {
-  const [rating,setRating] = useState(1)
+const ReviewSubmit = ({ product,id }) => {
+  const [rating,setRating] = useState(1);
+  const dispatch = useDispatch()
+  const [comment, setComment] = useState("");
+
+  const { success } = useSelector(
+    (state) => state.reviews
+  );
+
+  const { isAuthenticated } = useSelector( (state) => state.user);
+
+
+  useEffect(()=>{
+    if(!success){
+      setRating(1);
+      setComment("");
+    }
+  }, [success])
 
   // declaring ratings variables 
   let ratingFive = 0;
@@ -67,6 +85,18 @@ const ReviewSubmit = ({ product }) => {
     changeRating:changeReviewRating,
     starHoverColor: "#fbcd0a",
     isAggregateRating:true
+  };
+  
+  const review = {
+    rating,
+    comment,
+    id
+  }
+
+  const reviewSubmitHandler = () => {
+    if(isAuthenticated){
+      dispatch(createReview(review))
+    }
   };
 
   return (
@@ -145,15 +175,16 @@ const ReviewSubmit = ({ product }) => {
         <h3>Write a Review</h3>
         <div className='form_section'>
           <h4>Rating</h4>
+          <p style={{textAlign:"centre", color:"red", marginBottom:"0.5rem"}}>{ !isAuthenticated ? 'Please Login To Review' : ''}</p>
           <StarRatings {...ratingOptions2} /> 
         </div>
 
         <div className='form_section'>
           <h4>Review</h4>
-          <textarea name="" className='review_textField' rows="10">
+          <textarea name="" className='review_textField' rows="10" value={comment} onChange={(e)=> setComment(e.target.value)}>
           </textarea>
         </div>
-        <button className="submitButton">Submit</button>
+        <button className="submitButton" onClick={reviewSubmitHandler}>Submit</button>
       </div>
     </div>
   )

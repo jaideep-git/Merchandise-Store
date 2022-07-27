@@ -1,0 +1,280 @@
+/* Login SignUp Style */
+.LoginSignUpContainer {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: white;
+}
+.LoginSignUpBox {
+  background-color: white;
+  width: 25vw;
+  height: 70vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.login_signUp_toggle {
+  display: flex;
+  height: 3vmax;
+}
+.verticleLine {
+  margin-top: 10px;
+  border-right: 2px solid rgb(224, 219, 219);
+}
+.login_signUp_toggle > p {
+  color: rgba(0, 0, 0, 0.678);
+  font-size: 1vmax;
+  font-weight: 700;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.LoginSignUpBox > div > button {
+  background-color: black;
+  margin-top: -10px;
+  height: 3px;
+  width: 50%;
+  border: none;
+  transition: all 0.5s;
+  font-family: Montserrat;
+}
+.loginHeading {
+  text-align: center;
+}
+.loginHeadBox {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginHeadBox p {
+  color: rgb(242, 80, 80);
+  font-size: 1vmax;
+}
+
+.loginForm,
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 2vmax;
+  justify-content: space-evenly;
+  height: 70%;
+  transition: all 0.5s;
+}
+
+.signUpForm {
+  transform: translateY(-100%) translateX(-100vmax);
+}
+
+.loginForm > div,
+.signUpForm > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: black !important;
+}
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(201, 196, 196) !important ;
+}
+.loginForm > div > input,
+.signUpForm > div > input {
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  border-radius: 4px;
+  outline: none;
+}
+
+.loginForm > div > input::placeholder,
+.signUpForm > div > input::placeholder {
+  font-size: 1rem;
+  color: grey;
+}
+.loginForm > div > svg,
+.signUpForm > div > svg {
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+
+.loginForm > a {
+  color: rgba(0, 0, 0, 0.651);
+  text-decoration: none;
+  align-self: flex-end;
+  transition: all 0.5s;
+  font: 500 0.8vmax;
+}
+
+.loginForm > a:hover {
+  color: black;
+}
+
+.loginBtn,
+.signUpBtn {
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1vmax;
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+
+.shiftToLeft {
+  transform: translateX(-100%);
+}
+.shiftToNeutral {
+  transform: translateX(0%);
+}
+
+.shiftToNeutralForm {
+  transform: translateX(0%) translateY(-100%);
+}
+
+.shiftToRight {
+  transform: translateX(100%);
+}
+
+/* Profile Page Style */
+.profile_page {
+  margin-top: 2rem;
+}
+.profile_head {
+  display: flex;
+  justify-content: space-between;
+}
+.profile_head p {
+  text-decoration: underline;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.order_section{
+  margin-top: 2rem;
+}
+
+/* Edit Profile page */
+.editProfile{
+  margin-top: 2rem;
+  display: flex !important;
+  justify-content: space-between;
+}
+.editForm{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 40%;
+}
+.editBtn{
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1vmax;
+  width: 70%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+
+.red{
+  color:rgb(240, 65, 65);
+}
+.green{
+  color: green;
+}
+
+/* Forgot Password */
+.password_padding{
+  padding: 2rem 0;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.passwordHeading{
+  margin-top: 2rem;
+  text-align: center;
+}
+.recoveryEmail{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem ;
+  padding: 2rem;
+}
+.password_message{
+  text-align: center;
+}
+.password_login{
+  text-align: center;
+  text-decoration:underline;
+  color: black;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .LoginSignUpContainer {
+    background-color: white;
+  }
+  .LoginSignUpBox {
+    width: 90vw;
+    height: 70vh;
+  }
+  .login_signUp_toggle {
+    height: 5vmax;
+  }
+  .login_signUp_toggle > p {
+    font: 700 2vmax "Montserrat";
+  }
+
+  .loginForm,
+  .signUpForm {
+    padding: 5vmax;
+  }
+
+  .loginBtn,
+  .signUpBtn {
+    font: 300 1.9vmax "Montserrat";
+    height: 3rem;
+  }
+  .loginHeadBox p {
+    font-size: 2vmax;
+  }
+
+  .profile_head p {
+    font-size: 1.1rem;
+  }
+  .editForm{
+    width: 100%;
+  }
+  .editBtn{
+    font-size: 1rem;
+    width: 60%;
+    padding: 1.2vmax;
+  }
+  .editProfile{
+    display: block !important;
+  }
+}
