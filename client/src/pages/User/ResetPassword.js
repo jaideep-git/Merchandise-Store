@@ -21,7 +21,6 @@ const ResetPassword = () => {
   }
   const passwords = { password: password, confirmPassword: confirmPassword };
   const forgotPasswordHandler = (e) => {
-    console.log(`email -${passwords}`);
     e.preventDefault();
     dispatch(resetPassword(token, passwords));
   };

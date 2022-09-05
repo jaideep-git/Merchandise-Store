@@ -1,12 +1,10 @@
 import axios from "axios";
 import {
-  LOGIN_REQUEST,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAIL,
-  LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
   LOGOUT_SUCCESS,
@@ -26,7 +24,7 @@ import {
   CHANGE_STATUS,
 } from "../constants/userConstants";
 
-// Register
+// * REGISTER NEW USER
 export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
@@ -50,11 +48,9 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-// Login
-export const login = (email, password) => async (dispatch) => {
+// * LOGIN USER
+export const login = (email, password) => async (dispatch,getState) => {
   try {
-    dispatch({ type: LOGIN_REQUEST });
-
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
@@ -62,29 +58,25 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
 };
 
-// * Logout User
+// * LOGOUT USER
 export const logout = () => async (dispatch) => {
   try {
     await axios.get(`/api/v1/logout`);
-
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
   }
 };
 
-// * Get User Details
+// * GET USER DETAILS
 export const getUserDetails = () => async (dispatch) => {
   try {
-    dispatch({ type: LOAD_USER_REQUEST });
-
     const { data } = await axios.get(`/api/v1/user`);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
@@ -93,7 +85,7 @@ export const getUserDetails = () => async (dispatch) => {
   }
 };
 
-// Update Profile
+// * UPDATE PROFILE INFO
 export const updateProfile = (userData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
@@ -115,7 +107,7 @@ export const changeStatus = () => (dispatch) => {
   dispatch({ type: CHANGE_STATUS });
 };
 
-// Update Password
+// * UPDATE PASSWORD
 export const updatePassword = (passwords) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
@@ -137,7 +129,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
   }
 };
 
-// Forgot Password
+// * FORGOT PASSWORD
 export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
@@ -155,7 +147,7 @@ export const forgotPassword = (email) => async (dispatch) => {
   }
 };
 
-// Reset Password
+// * RESET PASSWORD
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
     dispatch({ type: RESET_PASSWORD_REQUEST });

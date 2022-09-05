@@ -1,11 +1,12 @@
 import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
+  CLEAR_CART,
   SAVE_SHIPPING_INFO,
 } from "../constants/cartConstants";
 import axios from "axios";
 
-// Add to Cart
+// * ADD TO CART
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/v1/product/${id}`);
 
@@ -15,7 +16,7 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
       product: data.product._id,
       name: data.product.name,
       price: data.product.price,
-      image: data.product.images[0].url,
+      imageUrl: data.product.imageUrl,
       stock: data.product.stock,
       quantity,
     },
@@ -24,7 +25,7 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-// REMOVE FROM CART
+// * REMOVE FROM CART
 export const removeItemFromCart = (id) => async (dispatch, getState) => {
   dispatch({
     type: REMOVE_CART_ITEM,
@@ -34,7 +35,13 @@ export const removeItemFromCart = (id) => async (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-// SAVE SHIPPING INFO
+// * CLEAR CART FROM LOCAL STORAGE
+export const clearCart = () => async (dispatch) => {
+  dispatch({ type: CLEAR_CART });
+  localStorage.clear();
+};
+
+// * SAVE SHIPPING INFO
 export const saveShippingInfo = (data) => async (dispatch) => {
   dispatch({
     type: SAVE_SHIPPING_INFO,

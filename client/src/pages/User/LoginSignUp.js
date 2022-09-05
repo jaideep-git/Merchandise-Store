@@ -1,24 +1,26 @@
 import React, { useRef, useState, useEffect } from "react";
-import Loading from "../../components/layout/Loader/Loading";
 import "./userStyle.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { login, register } from "../../store/actions/userAction";
+import { AiFillEyeInvisible } from "react-icons/ai";
+import { BiCodeBlock } from "react-icons/bi";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [signUpName, setSignUpName] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
 
   // * Getting User State
-  const { error, fetching, isAuthenticated } = useSelector( (state) => state.user);
- 
+  const { error, isAuthenticated } = useSelector((state) => state.user);
 
   // * Login Form Submit
   const loginSubmit = (e) => {
@@ -27,11 +29,13 @@ const LoginSignUp = () => {
     dispatch(login(loginEmail, loginPassword));
   };
 
-  useEffect(()=>{
-    if(isAuthenticated){
-      navigate('/profile')
+  const redirect = location.search ? location.search.split("=")[1] : "profile";
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(`/${redirect}`);
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   // * Register Form Submit
   const registerSubmit = (e) => {
@@ -66,6 +70,19 @@ const LoginSignUp = () => {
     }
   };
 
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
+
+  const testUser = () => {
+    setLoginEmail("testuser@gmail.com");
+    setLoginPassword("testuser1234");
+  };
+
   return (
     <div className="LoginSignUpContainer">
       <div className="LoginSignUpBox">
@@ -77,11 +94,26 @@ const LoginSignUp = () => {
           </div>
           <button ref={switcherTab}></button>
         </div>
+        {/* Login Form */}
         <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
           <div className="loginHeadBox">
             <h2 className="loginHeading">Login To Your Account</h2>
             <p>{loginActive ? error : ""}</p>
           </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "end",
+              cursor: "pointer",
+            }}
+            onClick={testUser}
+          >
+            <p style={{ textDecoration: "underline" }}>Test user</p>
+            <BiCodeBlock />
+          </div>
+
           <div className="loginEmail">
             <TextField
               style={{ width: "100%" }}
@@ -90,7 +122,7 @@ const LoginSignUp = () => {
               value={loginEmail}
               onChange={(e) => setLoginEmail(e.target.value)}
               InputProps={{
-               type: "email",
+                type: "email",
               }}
             />
           </div>
@@ -103,12 +135,13 @@ const LoginSignUp = () => {
               onChange={(e) => setLoginPassword(e.target.value)}
               InputProps={{
                 type: "password",
-               }}
+              }}
             />
           </div>
           <Link to="/password/forgot">Forget Password ?</Link>
           <input type="submit" value="Login" className="loginBtn" />
         </form>
+        {/* Sign Up Form */}
         <form
           className="signUpForm"
           ref={registerTab}
@@ -127,7 +160,7 @@ const LoginSignUp = () => {
               onChange={(e) => setSignUpName(e.target.value)}
               InputProps={{
                 type: "text",
-               }}
+              }}
             />
           </div>
           <div className="signUpEmail">
@@ -139,7 +172,7 @@ const LoginSignUp = () => {
               onChange={(e) => setSignUpEmail(e.target.value)}
               InputProps={{
                 type: "email",
-               }}
+              }}
             />
           </div>
           <div className="signUpPassword">
@@ -149,9 +182,12 @@ const LoginSignUp = () => {
               label="Password"
               value={signUpPassword}
               onChange={(e) => setSignUpPassword(e.target.value)}
-              InputProps={{
-                type: "password",
-               }}
+              type={passwordType}
+            />
+            <AiFillEyeInvisible
+              fontSize="1.5rem"
+              className="showPassword"
+              onClick={togglePassword}
             />
           </div>
           <input type="submit" value="Register" className="signUpBtn" />

@@ -32,7 +32,7 @@ footer {
 
 @media only screen and (max-width: 768px) {
   footer {
-    padding: 1rem 2rem;
+    padding: 0rem 2rem 1.7rem 2rem;
   }
 
   .footer_section {

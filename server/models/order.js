@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
   shippingInfo: {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    email: { type: String, required: [true, "Email required"], },
+    email: { type: String, required: [true, "Email required"] },
     address: { type: String, required: true },
     city: { type: String, required: true },
     state: { type: String, required: true },
@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema({
       name: { type: String, required: true },
       price: { type: Number, required: true },
       quantity: { type: Number, required: true },
-      image: { type: String, required: true },
+      imageUrl: { type: String, required: true },
       product: {
         type: mongoose.Schema.ObjectId,
         ref: "Product",

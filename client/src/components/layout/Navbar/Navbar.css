@@ -1,4 +1,4 @@
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,8 +67,27 @@ input[type="text"] {
   color: grey;
 }
 
+.cart_circle{
+  text-align: center;
+  line-height: 1.5em;
+  font-weight: 600;
+  font-size: 0.7rem;
+  color:black;
+  position: relative;
+  bottom: 15px;
+  right: 10px;
+  height: 15px;
+  width: 15px;
+  background-color: white ;
+  border-radius: 50%;
+  display: inline-block;
+}
+.search{
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 768px) {
-  nav {
+  .navbar {
     padding: 0.7rem 1rem;
   }
   .logo {

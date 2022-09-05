@@ -1,24 +1,26 @@
 import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import office from "../../assets/theoffice_600x.png";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../store/actions/productAction";
 import { addItemToCart } from "../../store/actions/cartAction";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import "./Product.css";
 import Review from "../../components/Product/Review";
 import ReviewSubmit from "../../components/Product/ReviewSubmit";
 import Loading from "../../components/layout/Loader/Loading";
 import { NEW_REVIEW_RESET } from "../../store/constants/productConstants";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [qty, setQty] = useState(1);
+  const [toCart, setToCart] = useState("");
+  const [loading,setLoading] = useState(false);
   
 
-  const { fetching, error, product } = useSelector(
+  const { fetching, product } = useSelector(
     (state) => state.productDetails
   );
 
@@ -54,7 +56,12 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
+    setLoading(true)
     dispatch(addItemToCart(id, qty));
+    setTimeout(() => {
+      setLoading(false)
+      setToCart("Go to cart")
+    }, 700)
   };
 
   // * Render Product Reviews
@@ -72,7 +79,7 @@ const ProductDetails = () => {
         <Container fixed className="product_container">
           <Grid container>
             <Grid item xs={12} sm={12} md={7} lg={6} className="product_image">
-              <img src={office} alt="" />
+              <img src={product.imageUrl} alt="" />
             </Grid>
             <Grid
               item
@@ -126,8 +133,9 @@ const ProductDetails = () => {
 
               <div>
                 <button className="cart_button" onClick={addToCartHandler}>
-                  Add To Cart
+                  {loading ? <BeatLoader size={7} loading={loading} color="white"/> : 'Add To Cart '}
                 </button>
+                <p style={{marginTop:"9px",textDecoration:"underline",cursor:"pointer",fontSize:"1.1rem"}}><Link to="/cart">{toCart}</Link></p>
               </div>
               <div className="product_desc">
                 <h4>Description:</h4>

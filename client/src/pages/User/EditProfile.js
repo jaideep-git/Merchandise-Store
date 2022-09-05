@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { Container } from "@mui/system";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateProfile,
   updatePassword,
-  getUserDetails,
 } from "../../store/actions/userAction";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
 
-  let { error, fetching, isUpdated, message } = useSelector(
+  let { error,isUpdated, message } = useSelector(
     (state) => state.profile
   );
 
@@ -34,11 +31,8 @@ const EditProfile = () => {
   const editProfileHandler = (e) => {
     e.preventDefault();
     setProfile(true);
-    console.log(profile)
     dispatch(updateProfile(userData));
   };
-
-  console.log(profile)
 
   // * On Password Change
   const changePasswordHandler = (e) => {

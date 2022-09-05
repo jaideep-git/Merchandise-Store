@@ -7,9 +7,12 @@ const Features = require("../utils/features");
 exports.getProducts = catchAsynError(async (req, res, next) => {
   const resultPerPage = 8;
 
-  const apiFeature = new Features(Product.find(), req.query).search().filter()
-  const pagination = new Features(Product.find(), req.query).search().filter().pagination(resultPerPage);
-  
+  const apiFeature = new Features(Product.find(), req.query).search().filter();
+  const pagination = new Features(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+
   const products = await apiFeature.query;
   const paginatedProducts = await pagination.query;
 
@@ -26,7 +29,6 @@ exports.getProducts = catchAsynError(async (req, res, next) => {
 
 // * Get Product Details
 exports.getProductDetails = catchAsynError(async (req, res, next) => {
-  
   let product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -42,7 +44,7 @@ exports.getProductDetails = catchAsynError(async (req, res, next) => {
 // * Create or Update the Review
 exports.productReview = catchAsynError(async (req, res, next) => {
   const { rating, comment, id } = req.body;
-  
+
   const review = {
     user: req.user._id,
     name: req.user.name,

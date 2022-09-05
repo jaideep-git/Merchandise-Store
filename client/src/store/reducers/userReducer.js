@@ -42,6 +42,7 @@ export const userReducer = (state = { user: {} }, action) => {
         fetching: false,
         isAuthenticated: true,
         user: action.payload,
+        error:null
       };
 
     case LOGOUT_SUCCESS:
@@ -49,6 +50,7 @@ export const userReducer = (state = { user: {} }, action) => {
         fetching: false,
         user: null,
         isAuthenticated: false,
+        error:null
       };
     case LOGIN_FAIL:
     case REGISTER_USER_FAIL:
@@ -64,8 +66,7 @@ export const userReducer = (state = { user: {} }, action) => {
       return {
         fetching: false,
         isAuthenticated: false,
-        user: null,
-        error: action.payload,
+        user: null,  
       };
 
     case LOGOUT_FAIL:
@@ -85,6 +86,7 @@ export const profileReducer = (state = {}, action) => {
     case UPDATE_PASSWORD_REQUEST:
       return {
         ...state,
+        isUpdated:false,
         fetching: true,
       };
     case UPDATE_PROFILE_SUCCESS:

@@ -1,29 +1,42 @@
 * {
   margin: 0;
-  padding: 0; 
+  padding: 0;
   scroll-behavior: smooth;
 }
 
-h1,h2,h3,h4,h5,h6,button,p,span{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+p,
+a,
+span {
   color: #474646;
 }
 
-#root{
-  min-height: 100vh; 
-  margin: 0; 
+a{
+  text-decoration: none;
+}
+
+#root {
+  min-height: 100vh;
+  margin: 0;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,100&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,100&display=swap');
+body {
+  font-family: Montserrat;
+}
+button, input {
+  font-family: Montserrat;
+}
 
-body{
-  font-family:Montserrat;
-}
-button{
-  font-family:Montserrat;
-}
 .App {
   text-align: center;
 }
@@ -48,7 +61,10 @@ button{
 }
 
 @media only screen and (max-width: 768px) {
-  #root{
+  #root {
     display: block;
+  }
+  .mobHide{
+    display: none;
   }
 }

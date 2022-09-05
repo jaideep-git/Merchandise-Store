@@ -1,16 +1,34 @@
 .product_container {
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 .product_name {
-  font-size: 2.7vmax;
+  font-size: 2.2vmax;
   font-weight: 500;
+} 
+.css-xti2a1-MuiButtonBase-root-MuiRadio-root {
+  padding: 1px 5px 1px 0px !important;
 }
-.product_rating {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin: 10px 0;
+.css-ahj2mt-MuiTypography-root{
+  font-family: Montserrat !important;
 }
+.css-1hbvpl3-MuiSvgIcon-root{
+  font-size: 1.2rem !important;
+}
+.css-11zohuh-MuiSvgIcon-root{
+  font-size: 1.2rem !important;
+}
+.css-j204z7-MuiFormControlLabel-root{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.css-dmmspl-MuiFormGroup-root{
+  margin-bottom: 6px;
+}
+.clearFilter{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .product_price {
   font-size: 1.9vmax;
   color: #5d5d5c;
@@ -33,7 +51,7 @@
 .product_quantity input {
   display: inline-block;
   padding: 0;
-  width: 35px;
+  width: 30px;
   height: 2rem;
   background-color: transparent;
   text-align: center;
@@ -80,7 +98,10 @@
   margin-bottom: 0.8rem;
 }
 .product_desc {
-  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
 }
 .page_heading2 {
   text-align: center;

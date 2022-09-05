@@ -19,6 +19,7 @@ const Navbar = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const { isAuthenticated } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const searchHandler = () => {
     if (searchKeyword) {
@@ -38,7 +39,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav>
+      <nav className="navbar">
         <div className="logo">
           <Link to="/">
             {" "}
@@ -57,7 +58,13 @@ const Navbar = () => {
           <Link to="/login">
             <AiOutlineUser color="white" fontSize="1.6em" />
           </Link>
-          <Link to="/cart"><AiOutlineShopping color="white" fontSize="1.6em" /></Link>
+          <div>
+            <Link to="/cart">
+              <AiOutlineShopping color="white" fontSize="1.6em" />
+            </Link>
+            <span className="cart_circle">{cartItems.length}</span>
+          </div>
+
           {isAuthenticated ? (
             <FiLogOut color="white" fontSize="1.6em" onClick={userLogout} />
           ) : (

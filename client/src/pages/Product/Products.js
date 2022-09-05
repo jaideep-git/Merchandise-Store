@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../../components/Product/ProductCard";
 import { getProducts } from "../../store/actions/productAction";
@@ -9,30 +12,28 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import StarRatings from "react-star-ratings";
 import "./Product.css";
+import { useSearchParams } from "react-router-dom";
 
 const Products = () => {
   const dispatch = useDispatch();
-  let {
-    fetching,
-    error,
-    productCount,
-    paginatedProducts,
-    paginatedProductCount,
-  } = useSelector((state) => state.products);
+  const [searchParams] = useSearchParams();
+  let singleMerch = searchParams.get("merch");
+  let { fetching, productCount, paginatedProducts, paginatedProductCount } =
+    useSelector((state) => state.products);
 
   const { search } = useParams();
   const [page, setPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState();
   const [merchandise, setMerchandise] = useState("");
+  const [merch, setMerch] = useState(singleMerch);
   const [rating, setRating] = useState(0);
-
   useEffect(() => {
-    dispatch(getProducts(search, page, price, merchandise, rating));
-  }, [dispatch, search, page, price, merchandise, rating]);
-
-  const [priceSelected, setPriceSelected] = useState();
-  const [merchSelected, setMerchSelected] = useState();
-  const [ratingSelected, setRatingSelected] = useState();
+    if (merch) {
+      dispatch(getProducts(search, page, price, merch, rating));
+    } else {
+      dispatch(getProducts(search, page, price, merchandise, rating));
+    }
+  }, [dispatch, search, page, price, merchandise, merch, rating]);
 
   // * Pagination Handller
   const handlePageChange = (e) => {
@@ -48,32 +49,28 @@ const Products = () => {
   };
 
   // * FilterBox Options
-  const priceFilter = [
-    [0, 25],
-    [25, 50],
-    [50, 100],
-    [100, 10000],
-  ];
   const merchandiseFilter = [
     "The Office",
     "F.R.I.E.N.D.S",
     "Stranger Things",
-    "Games of Throne",
+    "Game of Thrones",
   ];
 
-  const priceSelectionHandler = () => {
-    setPrice([0, 10000]);
-    setPriceSelected("");
+  const priceSelectionHandler = (event) => {
+    let priceValue = event.target.value;
+    setPrice(priceValue.split(","));
+    setPage(1);
   };
 
-  const merchSelectionHandler = () => {
-    setMerchandise("");
-    setMerchSelected("");
+  const merchSelectionHandler = (event) => {
+    setMerchandise(event.target.value);
+    setPage(1);
+    setMerch("");
   };
 
-  const ratingSelectionHandler = () => {
-    setRating(0);
-    setRatingSelected("");
+  const ratingSelectionHandler = (event) => {
+    setRating(event.target.value);
+    setPage(1);
   };
 
   return (
@@ -81,7 +78,7 @@ const Products = () => {
       {fetching ? (
         <Loading />
       ) : (
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Grid container columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
             <Grid
               item
@@ -100,225 +97,120 @@ const Products = () => {
                 {/* price filter */}
                 <div className="price_filter">
                   <h3 className="filterHeading">Price</h3>
-                  <ul className="filter_list">
-                    <li>
-                      {priceSelected === 1 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={priceSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-
-                      <span
-                        onClick={() => {
-                          setPrice(priceFilter[0]);
-                          setPriceSelected(1);
-                        }}
-                      >
-                        Under $25
-                      </span>
-                    </li>
-                    <li>
-                      {priceSelected === 2 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={priceSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-
-                      <span
-                        onClick={() => {
-                          setPrice(priceFilter[1]);
-                          setPriceSelected(2);
-                        }}
-                      >
-                        $25 to $50
-                      </span>
-                    </li>
-                    <li>
-                      {priceSelected === 3 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={priceSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-
-                      <span
-                        onClick={() => {
-                          setPrice(priceFilter[2]);
-                          setPriceSelected(3);
-                        }}
-                      >
-                        $50 to $100
-                      </span>
-                    </li>
-                    <li>
-                      {priceSelected === 4 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={priceSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-
-                      <span
-                        className="na"
-                        onClick={(e) => {
-                          setPrice(priceFilter[3]);
-                          setPriceSelected(4)
-                        }}
-                      >
-                        $100 above
-                      </span>
-                    </li>
-                  </ul>
+                  <RadioGroup
+                    name="controlled-radio-buttons-group"
+                    value={`${price}`}
+                    onChange={priceSelectionHandler}
+                  >
+                    <FormControlLabel
+                      value="0,25"
+                      control={<Radio color="success" />}
+                      label="Under $25"
+                    />
+                    <FormControlLabel
+                      value="25,100"
+                      control={<Radio color="success" />}
+                      label="$25 to $50"
+                    />
+                    <FormControlLabel
+                      value="50,100"
+                      control={<Radio color="success" />}
+                      label="$50 to $100"
+                    />
+                    <FormControlLabel
+                      value="100,10000"
+                      control={<Radio color="success" />}
+                      label="$100 above"
+                    />
+                  </RadioGroup>
+                  <span
+                    onClick={() => {
+                      setPrice();
+                    }}
+                    className="clearFilter"
+                  >
+                    Clear filter
+                  </span>
                 </div>
                 {/* Merchandise filter */}
                 <div className="merchandise_filter">
                   <h3 className="filterHeading">Merchandise</h3>
-                  <ul className="filter_list">
+                  <RadioGroup
+                    name="controlled-radio-buttons-group"
+                    value={merchandise}
+                    onChange={merchSelectionHandler}
+                  >
                     {merchandiseFilter.map((merch, index) => (
-                      <li key={index}>
-                        {merchSelected === index ? (
-                          <input
-                            readOnly
-                            type="checkbox"
-                            className="filterCheckbox"
-                            onClick={merchSelectionHandler}
-                            checked
-                          />
-                        ) : (
-                          ""
-                        )}
-                        <span
-                          onClick={() => {
-                            console.log(merchSelected, index);
-                            setMerchandise(merch);
-                            setMerchSelected(index);
-                          }}
-                        >
-                          {merch}
-                        </span>
-                      </li>
+                      <FormControlLabel
+                        value={merch}
+                        key={index}
+                        control={<Radio color="success" />}
+                        label={merch}
+                      />
                     ))}
-                  </ul>
+                  </RadioGroup>
+                  <span
+                    onClick={() => {
+                      setMerchandise("");
+                    }}
+                    className="clearFilter"
+                  >
+                    Clear filter
+                  </span>
                 </div>
                 {/* Rating filter */}
                 <div className="review_filter">
                   <h3 className="filterHeading">Customer Review</h3>
-                  <ul className="filter_list">
-                    <li className="rating_li">
-                      {ratingSelected === 4 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={ratingSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <div
-                        onClick={() => {
-                          setRatingSelected(4);
-                          setRating(4);
-                        }}
-                      >
-                        <StarRatings {...options} rating={4} /> & Up
-                      </div>
-                    </li>
-                    <li className="rating_li">
-                      {ratingSelected === 3 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={ratingSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <div
-                        onClick={() => {
-                          setRatingSelected(3);
-                          setRating(3);
-                        }}
-                      >
-                        <StarRatings {...options} rating={3} /> & Up
-                      </div>
-                    </li>
-                    <li className="rating_li">
-                      {ratingSelected === 2 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={ratingSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <div
-                        onClick={() => {
-                          setRatingSelected(2);
-                          setRating(2);
-                        }}
-                      >
-                        <StarRatings {...options} rating={2} /> & Up
-                      </div>
-                    </li>
-                    <li className="rating_li">
-                      {ratingSelected === 1 ? (
-                        <input
-                          readOnly
-                          type="checkbox"
-                          className="filterCheckbox"
-                          onClick={ratingSelectionHandler}
-                          checked
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <div
-                        onClick={() => {
-                          setRatingSelected(1);
-                          setRating(1);
-                        }}
-                      >
-                        <StarRatings {...options} rating={1} /> & Up
-                      </div>
-                    </li>
-                  </ul>
+                  <RadioGroup
+                    name="controlled-radio-buttons-group"
+                    value={rating}
+                    onChange={ratingSelectionHandler}
+                  >
+                    <FormControlLabel
+                      value={5}
+                      control={<Radio color="success" />}
+                      label={<StarRatings {...options} rating={5} />}
+                    />
+                    <FormControlLabel
+                      value={4}
+                      control={<Radio color="success" />}
+                      label={<StarRatings {...options} rating={4} />}
+                    />
+                    <FormControlLabel
+                      value={3}
+                      control={<Radio color="success" />}
+                      label={<StarRatings {...options} rating={3} />}
+                    />
+                    <FormControlLabel
+                      value={2}
+                      control={<Radio color="success" />}
+                      label={<StarRatings {...options} rating={2} />}
+                    />
+                    <FormControlLabel
+                      value={1}
+                      control={<Radio color="success" />}
+                      label={<StarRatings {...options} rating={1} />}
+                    />
+                  </RadioGroup>
+                  <span
+                    onClick={() => {
+                      setRating(0);
+                    }}
+                    className="clearFilter"
+                  >
+                    Clear filter
+                  </span>
                 </div>
               </div>
             </Grid>
+            {/* Products Section */}
             <Grid item xs={6} sm={6} md={10} lg={10} xl={10}>
               {search ? (
-                <h2 className="search_heading">Search Results</h2>
-              ) : (
+                <h2 className="page_heading">Search Results</h2>
+              ) : !merchandise && !merch ? (
                 <h2 className="page_heading">All Products</h2>
+              ) : (
+                <h2 className="page_heading">{merchandise || merch}</h2>
               )}
               {search && productCount ? (
                 <p className="search_results">

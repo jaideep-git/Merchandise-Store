@@ -8,8 +8,8 @@ function Footer() {
   return (
     <footer>
       <Container maxWidth="xl">
-          <Grid container>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
+          <Grid container columnSpacing={{ xs:2, sm: 2, md: 1 }}>
+            <Grid item xs={6} sm={6} md={3} lg={3}>
               <div className="footer_section">
                 <h3>Follow us</h3>
                 <ul>
@@ -25,7 +25,7 @@ function Footer() {
                 </ul>
               </div>
             </Grid>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3}>
               <div className="footer_section">
                 <h3>About Us</h3>
                 <ul>
@@ -36,7 +36,7 @@ function Footer() {
                 </ul>
               </div>
             </Grid>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3}>
               <div className="footer_section">
                 <h3>My Account</h3>
                 <ul>
@@ -47,7 +47,7 @@ function Footer() {
                 </ul>
               </div>
             </Grid>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3}>
               <div className="footer_section">
                 <h3>Merchandise</h3>
                 <ul>

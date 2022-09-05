@@ -12,7 +12,7 @@ exports.registerUser = catchAsynError(async (req, res, next) => {
   if (!email || !password || !name) {
     return next(new ErrorHandler("All fields are required", 400));
   }
-  
+
   const user = await User.create({
     name: name,
     email: email,
@@ -52,7 +52,8 @@ exports.loginUser = catchAsynError(async (req, res, next) => {
 
 // * Get User Detail
 exports.getUserDetails = catchAsynError(async (req, res, next) => {
-  const user = await User.findById(req.user.id);
+  const id = req.userId;
+  const user = await User.findById(id);
 
   if (!user) {
     return next(new ErrorHandler("Login Required", 400));
@@ -79,18 +80,15 @@ exports.logout = catchAsynError(async (req, res, next) => {
 
 // * Forget Password
 exports.forgotPassword = catchAsynError(async (req, res, next) => {
-  console.log(`body ${req.body}`)
   const user = await User.findOne({ email: req.body.email });
-  
+
   if (!user) {
     return next(new ErrorHandler("Invalid Email", 404));
   }
-  console.log(`user- ${user}`);
   const resetToken = user.getResetPasswordToken();
 
   await user.save({ validateBeforeSave: false });
-  console.log(`token- ${resetToken}`);
-  const resetPasswordUrl = `${req.protocol}://192.168.0.41:3000/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
 
   const message = `Password reset link - \n\n ${resetPasswordUrl}`;
 

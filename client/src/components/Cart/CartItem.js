@@ -1,6 +1,6 @@
 import React from "react";
-import office from "../../assets/theoffice_600x.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   addItemToCart,
   removeItemFromCart,
@@ -10,8 +10,7 @@ const CartItem = ({ item }) => {
   const mobile = window.innerWidth <= 768;
   const dispatch = useDispatch();
 
-  const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+  const subTotal = item.price * item.quantity;
 
   const increaseQuantity = (id, qty, stock) => {
     if (stock > qty) {
@@ -32,12 +31,18 @@ const CartItem = ({ item }) => {
   return (
     <div className="cart_item">
       <div className="cartItem_imageWrapper">
-        <img src={office} alt="" />
+        <img src={item.imageUrl} alt="" />
       </div>
       <div className="cartItem_info">
         <div className="cartInfo_section">
-          <p className="cartProductName">{item.name}</p>
-          <p className="cartPrice">${item.price}</p>
+          <Link to={`/product/${item.product}`} className="cartProductName">
+            {item.name}
+          </Link>
+          <div className="cartTotalDiv">
+            <p className="cartPrice">${item.price}</p>
+            <p className="cartPriceTotal">${item.price * item.quantity}</p>
+          </div>
+
           {mobile ? (
             <>
               <div className="cartButtons">
@@ -98,8 +103,8 @@ const CartItem = ({ item }) => {
         </p>
       </div>
       <div className="cartItem_total">
-        <div>
-          <span>${item.price}</span>
+        <div className="cartItem_subTotal">
+          <span>${subTotal}</span>
         </div>
       </div>
     </div>
