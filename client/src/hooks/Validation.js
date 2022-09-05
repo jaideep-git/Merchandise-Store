@@ -12,47 +12,54 @@ const validation = (values) => {
 
   for (let key in values) {
     let inputValue = values[key];
-
     if (!inputValue) {
       errors[key] = "This field is required";
       totalErrors += 1;
     } else {
       switch (key) {
-        case firstName:
+        case "firstName":
           if (!charPattern.test(inputValue)) {
             errors[key] = "Please enter a valid first name";
             totalErrors += 1;
           }
-        case lastName:
+          break;
+        case "lastName":
           if (!charPattern.test(inputValue)) {
             errors[key] = "Please enter a valid last name";
             totalErrors += 1;
           }
-        case email:
+          break;
+        case "email":
           if (!emailPattern.test(inputValue)) {
             errors[key] = "Please enter a valid email address";
             totalErrors += 1;
           }
-        case phone:
+          break;
+        case "phone":
           if (!mobileNumberPattern.test(inputValue)) {
             errors[key] = "Phone number must be 10 digits";
             totalErrors += 1;
           }
-        case postalCode:
+          break;
+        case "postalCode":
           if (!postalCodePattern.test(inputValue)) {
             errors[key] = "Please enter a valid postal code";
             totalErrors += 1;
           }
-        case address:
+          break;
+        case "address":
           if (!addressPattern.test(inputValue)) {
             errors[key] = "Please enter valid address";
             totalErrors += 1;
           }
-        case city:
+          break;
+        case "city":
           if (!cityPattern.test(inputValue)) {
             errors[key] = "Please enter a valid city name";
             totalErrors += 1;
           }
+          break;
+        default:
       }
     }
   }
@@ -62,3 +69,4 @@ const validation = (values) => {
 };
 
 export default validation;
+
