@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./Product.css";
 import Container from "@mui/material/Container";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -11,7 +12,6 @@ import Loading from "../../components/layout/Loader/Loading";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import StarRatings from "react-star-ratings";
-import "./Product.css";
 import { useSearchParams } from "react-router-dom";
 
 const Products = () => {

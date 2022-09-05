@@ -4,27 +4,27 @@
 .product_name {
   font-size: 2.2vmax;
   font-weight: 500;
-} 
-.css-xti2a1-MuiButtonBase-root-MuiRadio-root {
+}
+.css-kmin1i {
   padding: 1px 5px 1px 0px !important;
 }
-.css-ahj2mt-MuiTypography-root{
+.css-9l3uo3 {
   font-family: Montserrat !important;
 }
-.css-1hbvpl3-MuiSvgIcon-root{
+.css-q8lw68{
   font-size: 1.2rem !important;
 }
-.css-11zohuh-MuiSvgIcon-root{
+.css-1u5ei5s{
   font-size: 1.2rem !important;
 }
-.css-j204z7-MuiFormControlLabel-root{
+.css-1jaw3da {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
-.css-dmmspl-MuiFormGroup-root{
+.css-1h7anqn{
   margin-bottom: 6px;
 }
-.clearFilter{
+.clearFilter {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -147,17 +147,16 @@
   margin-right: 5px;
 }
 
-input[type=checkbox]:checked {
+input[type="checkbox"]:checked {
   /*CSS after CHECKED*/
   color: #ffd369;
 }
-
 
 .css-1diafny-MuiSlider-root {
   color: black !important;
 }
 
-.rating_li{
+.rating_li {
   display: flex;
   gap: 5px;
 }
@@ -213,14 +212,14 @@ input[type=checkbox]:checked {
   color: white;
 }
 
-.filter_sectionProductMob{
+.filter_sectionProductMob {
   padding-top: 2rem;
 }
 
-.filter_sectionSearchMob{
+.filter_sectionSearchMob {
   padding-top: 2rem;
 }
-.search_headingMob{
+.search_headingMob {
   margin: 1rem 0 0.7rem 0;
   text-align: center;
 }
@@ -256,7 +255,7 @@ input[type=checkbox]:checked {
   .product_stock {
     text-align: center;
   }
-  .productDetail_button{
+  .productDetail_button {
     display: flex;
     justify-content: center;
   }
