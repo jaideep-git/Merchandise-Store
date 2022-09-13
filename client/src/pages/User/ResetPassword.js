@@ -38,8 +38,7 @@ const ResetPassword = () => {
               </>
             ) : (
               <>
-                <h2 className="loginHeading">Recover Password</h2>
-                <p className="passwordHeading">Please Enter Your Email</p>
+                <h2 className="loginHeading">Reset Password</h2>
                 <form onSubmit={forgotPasswordHandler}>
                   <div className="recoveryEmail">
                     <p className="password_message red">{error}</p>
