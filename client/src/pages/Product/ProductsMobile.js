@@ -227,11 +227,6 @@ const ProductsMobile = () => {
               ) : (
                 ""
               )}
-              {!productCount ? (
-                <p className="search_results">No Results Found</p>
-              ) : (
-                ""
-              )}
               <Grid
                 container
                 rowSpacing={2}

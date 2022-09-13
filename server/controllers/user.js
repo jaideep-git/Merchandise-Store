@@ -90,7 +90,7 @@ exports.forgotPassword = catchAsynError(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
   const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
 
-  const message = `Password reset link - \n\n ${resetPasswordUrl}`;
+  const message = `Password reset link - ${resetPasswordUrl}`;
 
   try {
     await sendEmail({
