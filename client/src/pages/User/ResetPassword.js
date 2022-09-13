@@ -45,7 +45,7 @@ const ResetPassword = () => {
                     <TextField
                       style={{ width: "100%" }}
                       id="outlined-multiline-flexible"
-                      label="Password"
+                      label="New Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       InputProps={{
