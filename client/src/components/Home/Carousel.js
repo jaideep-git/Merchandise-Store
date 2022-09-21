@@ -1,26 +1,17 @@
-import React from 'react';
-import './Carousel.css';
-import office from '../../assets/office.jpg';
-import Slider from "react-slick";
+import React from "react";
+import "./Carousel.css";
+import office from "../../assets/office_web.png";
+import officeMob from "../../assets/office_mobile.png";
 
 function Carousel() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows:false
-  };
+  const mobile = window.innerWidth <= 768;
   return (
-    <div className='hero'>
-      <Slider {...settings}>
-          <div className='hero_image'>
-            <img src={office} alt=""/>
-          </div>
-        </Slider>
+    <div className="hero">
+      <div className="hero_image">
+        <img src={mobile ? officeMob : office} alt="" />
+      </div>
     </div>
-  )
+  );
 }
 
-export default Carousel
+export default Carousel;

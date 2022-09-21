@@ -4,7 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { login, register } from "../../store/actions/userAction";
-import { AiFillEyeInvisible } from "react-icons/ai";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoMdEye } from "react-icons/io";
 import { BiCodeBlock } from "react-icons/bi";
 
 const LoginSignUp = () => {
@@ -184,11 +185,19 @@ const LoginSignUp = () => {
               onChange={(e) => setSignUpPassword(e.target.value)}
               type={passwordType}
             />
-            <AiFillEyeInvisible
-              fontSize="1.5rem"
-              className="showPassword"
-              onClick={togglePassword}
-            />
+            {passwordType === "password" ? (
+              <IoMdEyeOff
+                fontSize="1.3rem"
+                className="showPassword"
+                onClick={togglePassword}
+              />
+            ) : (
+              <IoMdEye
+                fontSize="1.3rem"
+                className="showPassword"
+                onClick={togglePassword}
+              />
+            )}
           </div>
           <input type="submit" value="Register" className="signUpBtn" />
         </form>
