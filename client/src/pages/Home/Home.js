@@ -75,7 +75,7 @@ function Home() {
             <Container maxWidth="lg">
               <Grid
                 container
-                rowSpacing={3}
+                rowSpacing={1}
                 columnSpacing={{ xs: 2, sm: 2, md: 2 }}
               >
                 {paginatedProducts &&

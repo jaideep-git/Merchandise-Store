@@ -226,7 +226,7 @@ const Products = () => {
               )}
               <Grid
                 container
-                rowSpacing={2}
+                rowSpacing={1}
                 columnSpacing={{ xs: 2, sm: 2, md: 2 }}
               >
                 {paginatedProducts &&
