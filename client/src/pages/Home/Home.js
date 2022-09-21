@@ -5,7 +5,6 @@ import Carousel from "../../components/Home/Carousel";
 import "./Home.css";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Title from "../../components/layout/Navbar/Title";
 import { getProducts } from "../../store/actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../../components/layout/Loader/Loading";
@@ -30,7 +29,6 @@ function Home() {
         <Loading />
       ) : (
         <>
-          <Title title={"Home Page"} />
           <div>
             <Link to="/products">
               <Carousel />
