@@ -220,6 +220,7 @@ const ReviewSubmit = ({ product, id }) => {
           <textarea
             name=""
             className="review_textField"
+            style={{fontSize:"1rem"}}
             rows="10"
             value={comment}
             onChange={(e) => setComment(e.target.value)}

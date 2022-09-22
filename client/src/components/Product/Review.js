@@ -17,7 +17,7 @@ const Review = ({ review }) => {
       <div className='profile_circle'>
         {review.name.charAt(0)}
       </div>
-      <div>
+      <div style={{display:"flex",flexDirection:"column", gap:"7px"}}>
         <StarRatings {...options} /> 
         <p><b>{review.name}</b></p>
         <p>{ review.comment }</p>
