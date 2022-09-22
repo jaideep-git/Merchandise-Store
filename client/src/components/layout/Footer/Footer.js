@@ -7,7 +7,7 @@ import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 function Footer() {
   return (
     <footer>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
           <Grid container columnSpacing={{ xs:2, sm: 2, md: 1 }}>
             <Grid item xs={6} sm={6} md={3} lg={3}>
               <div className="footer_section">
